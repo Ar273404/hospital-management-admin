@@ -1,1 +1,1 @@
-export const url = "https://hospital-management-backend-1-mwy0.onrender.com";
+export const url = "https://hospital-management-47sr.onrender.com";

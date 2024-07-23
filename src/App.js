@@ -13,7 +13,7 @@ import AddAdmin from './components/AddAdmin';
 import AddDoctor from './components/AddDoctor';
 import "./App.css";
 import MyProfile from "./components/MyProfile";
-import { url } from "./API";
+import { url } from "./API.jsx";
 const App = () => {
   const { isAuthenticated, setIsAuthenticated, admin, setAdmin } =
     useContext(Context);

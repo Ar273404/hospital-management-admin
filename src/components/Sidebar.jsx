@@ -14,31 +14,22 @@ import { url } from "../API";
 
 const Sidebar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
-  const { isAuthenticated, setIsAuthenticated,admin } = useContext(Context);
-  const navigate = useNavigate();
+  const { isAuthenticated, setIsAuthenticated, admin } = useContext(Context);
+  const navigateTo = useNavigate();
 
   const handleLogout = async () => {
     try {
-      const response = await axios.get(
-        `${url}/admin/logout`,
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await axios.get(`${url}/user/admin/logout`, {
+        withCredentials: true,
+      });
       toast.success(response.data.message);
       setIsAuthenticated(false);
+      navigateTo("/login");
     } catch (error) {
-      toast.error(error.response.data.message);
+      console.error("Logout error:", error);
+      toast.error(error.response?.data?.message || "Logout failed");
     }
   };
-  
-
-  const navigateTo = (path) => {
-    navigate(path);
-    setShowSidebar(false); // Close sidebar after navigation on mobile
-  };
-
-
 
   return (
     <>
@@ -111,7 +102,7 @@ const Sidebar = () => {
                 onClick={() => navigateTo("/doctor/addnew")}
                 className="cursor-pointer">
                 <a
-                  aria-label="Add New Admin"
+                  aria-label="Add New Doctor"
                   className="text-white text-sm flex flex-col items-center hover:bg-[#22284f] rounded px-4 py-5 transition-all">
                   <MdAddModerator className="text-xl" />
                   <span>Add New Doctor</span>
@@ -128,12 +119,12 @@ const Sidebar = () => {
                 </a>
               </li>
               <li onClick={handleLogout} className="cursor-pointer">
-                <a
+                <button
                   aria-label="Logout"
-                  className="text-white text-sm flex flex-col items-center hover:bg-[#22284f] rounded px-4 py-5 transition-all">
+                  className="text-white ml-7 text-sm flex flex-col items-center hover:bg-[#22284f] rounded px-4 py-5 transition-all bg-transparent border-none outline-none">
                   <RiLogoutBoxRLine className="text-xl font-bold text-yellow-400" />
                   <span>Logout</span>
-                </a>
+                </button>
               </li>
             </ul>
           </nav>
