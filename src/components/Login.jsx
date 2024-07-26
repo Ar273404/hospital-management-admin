@@ -1,6 +1,6 @@
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
-import { Link, useNavigate, Navigate } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { useNavigate, Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Context } from "../index.js";
 import { url } from "../API.jsx";
@@ -51,7 +51,7 @@ const Login = () => {
       <div className="grid md:grid-cols-2 items-center gap-2 h-full">
         <div className="max-w-lg p-4">
           <img
-            src="https://www.csdtitsolution.com/HospitalManagementSoftware/h2.png"
+            src="/h2.png"
             className="ml-16 lg:max-w-full w-full h-auto object-contain block mx-auto"
             alt="login-image"
           />

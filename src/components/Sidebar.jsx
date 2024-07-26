@@ -5,6 +5,7 @@ import { AiFillMessage } from "react-icons/ai";
 import { FaUserDoctor } from "react-icons/fa6";
 import { MdAddModerator } from "react-icons/md";
 import { ImCross } from "react-icons/im";
+import { FcHome } from "react-icons/fc";
 import { FaBars } from "react-icons/fa";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -70,6 +71,18 @@ const Sidebar = () => {
             </div>
 
             <ul className="space-y-1 mt-10">
+              <Link
+                to={"https://hospital-management-frontend-bp5y.onrender.com"}>
+                <li className="cursor-pointer">
+                  <a
+                    aria-label="Home"
+                    className="text-white text-sm flex flex-col items-center bg-[#22284f] rounded px-4 py-5 transition-all">
+                    <FcHome className="text-xl"/>
+                    <span>Main Page</span>
+                  </a>
+                </li>
+              </Link>
+
               <li onClick={() => navigateTo("/")} className="cursor-pointer">
                 <a
                   aria-label="Home"
