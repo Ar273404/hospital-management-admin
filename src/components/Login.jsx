@@ -28,7 +28,6 @@ const Login = () => {
           }
         )
         .then((res) => {
-          console.log("Admin login message:=>" + res);
           toast.success("👍👍👍" + res.data.message);
           setIsAuthenticated(true);
           navigateTo("/");
