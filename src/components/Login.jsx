@@ -57,7 +57,10 @@ const Login = () => {
         </div>
 
         <div className="flex items-center p-6 bg-[#0C172C] h-full lg:w-11/12 lg:ml-auto">
-          <form onSubmit={handleLogin} className="max-w-lg w-full mx-auto">
+          <form
+            onSubmit={handleLogin}
+            className="max-w-lg w-full mx-auto"
+            id="login-form">
             <div className="mb-6">
               <h3 className="text-2xl  font-bold text-yellow-400">
                 🤷🤷🤷 Welcome to Dashboard
@@ -112,11 +115,27 @@ const Login = () => {
               />
             </div>
             <div className="mt-8">
-              <button
-                type="submit"
-                className="w-max shadow-xl py-3 px-6 text-sm text-gray-800 font-semibold rounded-md bg-transparent bg-yellow-400 hover:bg-yellow-500 focus:outline-none">
-                Login
-              </button>
+              <div className="flex gap-4">
+                <button
+                  type="submit"
+                  className="w-max shadow-xl py-3 px-6 text-sm text-gray-800 font-semibold rounded-md bg-transparent bg-yellow-400 hover:bg-yellow-500 focus:outline-none">
+                  Login
+                </button>
+                <button
+                  onClick={async () => {
+                    setEmail("admin@gmail.com");
+                    setPassword("12345");
+                    setConfirmPassword("12345");
+
+                    setTimeout(() => {
+                      document.getElementById("login-form").requestSubmit();
+                    }, 0);
+                  }}
+                  type="button"
+                  className="w-max shadow-xl py-3 px-6 text-sm text-gray-800 font-semibold rounded-md bg-transparent bg-yellow-400 hover:bg-yellow-500 focus:outline-none">
+                  Demo Login
+                </button>
+              </div>
             </div>
           </form>
         </div>
