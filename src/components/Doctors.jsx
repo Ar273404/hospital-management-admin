@@ -24,6 +24,7 @@ const Doctors = () => {
         const { data } = await axios.get(`${url}/user/doctors`, {
           withCredentials: true,
         });
+        console.log(data);
         setDoctors(data.doctors);
       } catch (error) {
         toast.error(error.response.data.message);
@@ -31,6 +32,19 @@ const Doctors = () => {
     };
     fetchDoctors();
   }, []);
+
+  const deleteDoctor = async (doctorId) => {
+    try {
+      await axios.delete(`${url}/user/doctor/${doctorId}`, {
+        withCredentials: true,
+      });
+      toast.success("Doctor deleted successfully!");
+      // Update the state to reflect the changes
+      setDoctors((prev) => prev.filter((doc) => doc._id !== doctorId));
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Failed to delete doctor.");
+    }
+  };
 
   if (!isAuthenticated) {
     return <Navigate to={"/login"} />;
@@ -55,12 +69,12 @@ const Doctors = () => {
                         ? item.docAvatar.url
                         : "https://via.placeholder.com/300"
                     }
-                    alt={`${item.firstName} ${item.lastName}`}
+                    alt={`Dr.${item.firstName} ${item.lastName}`}
                     className="w-full h-60 object-contain"
                   />
                   <div className="p-6">
                     <h3 className="text-xl font-bold text-blue-900 mb-2 text-center">
-                      {`${item.firstName} ${item.lastName}`}
+                      {`Dr.${item.firstName} ${item.lastName}`}
                     </h3>
                     <p className="text-gray-900 text-sm mb-2 flex items-center">
                       <FaEnvelope className="mr-2 text-blue-500 text-xl" />
@@ -86,6 +100,13 @@ const Doctors = () => {
                       <BiMaleFemale className="mr-2 text-blue-500 text-xl" />
                       <strong>Gender:</strong> {item.gender}
                     </p>
+                  </div>
+                  <div className="p-4">
+                    <button
+                      onClick={() => deleteDoctor(item._id)}
+                      className="w-full bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600">
+                      Delete
+                    </button>
                   </div>
                 </div>
               ))
